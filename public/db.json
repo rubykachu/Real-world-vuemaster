@@ -98,6 +98,20 @@
       "date": "2019-11-08T02:53:00.000Z",
       "time": "2:00",
       "attendees": []
+    },
+    {
+      "id": 73885,
+      "category": "Tea",
+      "organizer": {
+        "id": 123,
+        "name": "Minh"
+      },
+      "title": "asda",
+      "description": "asd",
+      "location": "asd",
+      "date": "2019-11-08T07:57:00.000Z",
+      "time": "3:00",
+      "attendees": []
     }
   ]
 }

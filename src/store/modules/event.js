@@ -1,4 +1,5 @@
 import EventService from "@/services/EventService.js";
+import * as message from "@/store/modules/message_handler.js";
 
 export const namespaced = true;
 
@@ -24,12 +25,18 @@ export const mutations = {
 };
 
 export const actions = {
-  createEvent({ commit }, event) {
-    EventService.postEvent(event).then(() => {
-      commit("ADD_EVENT", event);
-    });
+  createEvent({ commit, dispatch }, event) {
+    return EventService.postEvent(event)
+      .then(() => {
+        commit("ADD_EVENT", event);
+        message.dispatchSuccess(dispatch);
+      })
+      .catch(error => {
+        message.dispatchError(dispatch, error.message);
+        throw error;
+      });
   },
-  fetchEvents({ commit }, { page, perPage }) {
+  fetchEvents({ commit, dispatch }, { page, perPage }) {
     EventService.getEvents(page, perPage)
       .then(response => {
         let numPage = parseInt(response.headers["x-total-count"]);
@@ -37,10 +44,10 @@ export const actions = {
         commit("SET_EVENTS", response.data);
       })
       .catch(error => {
-        console.log("There was an error:", error.response);
+        message.dispatchError(dispatch, error.message);
       });
   },
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     var event = getters.getEventById(id);
 
     if (event) {
@@ -51,7 +58,7 @@ export const actions = {
           commit("SET_EVENT", response.data);
         })
         .catch(error => {
-          console.log("There was an error:", error.response);
+          message.dispatchError(dispatch, error.message);
         });
     }
   }
