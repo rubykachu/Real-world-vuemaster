@@ -22,7 +22,7 @@
 
 <script>
 import EventCard from "@/components/EventCard.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 const perPage = 3;
 export default {
@@ -38,11 +38,16 @@ export default {
     },
     ...mapState(["event", "user"])
   },
+  methods: mapActions("event", ["fetchEvents"]),
   created() {
-    this.$store.dispatch("event/fetchEvents", {
+    this.fetchEvents({
       page: this.page,
-      perPage: perPage // default
+      perPage: perPage
     });
+    // this.$store.dispatch("event/fetchEvents", {
+    //   page: this.page,
+    //   perPage: perPage // default
+    // });
   }
 };
 </script>
