@@ -23,31 +23,38 @@
 <script>
 import EventCard from "@/components/EventCard.vue";
 import { mapState, mapActions } from "vuex";
+import store from "@/store/index.js";
 
-const perPage = 3;
+function getPageEvents(to, next) {
+  const currentPage = parseInt(to.query.page || 1);
+  store.dispatch("event/fetchEvents", { page: currentPage }).then(() => {
+    to.params.page = currentPage;
+    next();
+  });
+}
+
 export default {
   components: {
     EventCard
   },
+  props: {
+    page: {
+      type: Number,
+      required: true
+    }
+  },
   computed: {
-    page() {
-      return parseInt(this.$route.query.page) || 1;
-    },
     hasNextPage() {
-      return this.event.totalEvents > this.page * perPage;
+      return this.event.eventsTotal > this.page * this.event.perPage;
     },
     ...mapState(["event", "user"])
   },
   methods: mapActions("event", ["fetchEvents"]),
-  created() {
-    this.fetchEvents({
-      page: this.page,
-      perPage: perPage
-    });
-    // this.$store.dispatch("event/fetchEvents", {
-    //   page: this.page,
-    //   perPage: perPage // default
-    // });
+  beforeRouteEnter(to, _from, next) {
+    getPageEvents(to, next);
+  },
+  beforeRouteUpdate(to, _from, next) {
+    getPageEvents(to, next);
   }
 };
 </script>

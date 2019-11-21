@@ -30,6 +30,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import store from "@/store/index.js";
 
 export default {
   props: ["id"],
@@ -37,9 +38,14 @@ export default {
     event: state => state.event.event
   }),
   methods: mapActions("event", ["fetchEvent"]),
-  created() {
-    this.fetchEvent(this.id);
-    // this.$store.dispatch("event/fetchEvent", this.id);
+  // created() {
+  // this.fetchEvent(this.id);
+  // this.$store.dispatch("event/fetchEvent", this.id);
+  // },
+  beforeRouteEnter(to, _from, next) {
+    store.dispatch("event/fetchEvent", to.params.id).then(() => {
+      next();
+    });
   }
 };
 </script>
