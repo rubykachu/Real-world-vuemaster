@@ -1,9 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import NProgress from "nprogress";
 import EventList from "../views/EventList.vue";
 import EventShow from "../views/EventShow.vue";
 import EventCreate from "../views/EventCreate.vue";
-import NProgress from "nprogress";
+import NotFound from "../views/NotFound.vue";
+import NetworkIssue from "../views/NetworkIssue.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +26,21 @@ const routes = [
     path: "/event/create",
     name: "event-create",
     component: EventCreate
+  },
+  {
+    path: "/404",
+    name: "not-found",
+    component: NotFound,
+    props: true
+  },
+  {
+    path: "/network-issue",
+    name: "network-issue",
+    component: NetworkIssue
+  },
+  {
+    path: "*",
+    redirect: { name: "not-found", params: { resource: "page" } }
   }
 ];
 

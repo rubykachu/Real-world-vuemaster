@@ -43,9 +43,18 @@ export default {
   // this.$store.dispatch("event/fetchEvent", this.id);
   // },
   beforeRouteEnter(to, _from, next) {
-    store.dispatch("event/fetchEvent", to.params.id).then(() => {
-      next();
-    });
+    store
+      .dispatch("event/fetchEvent", to.params.id)
+      .then(() => {
+        next();
+      })
+      .catch(error => {
+        if (error.response && error.response.status == 404) {
+          next({ name: "not-found", params: { resource: "event" } });
+        } else {
+          next({ name: "network-issue" });
+        }
+      });
   }
 };
 </script>

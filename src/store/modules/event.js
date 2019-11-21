@@ -42,10 +42,17 @@ export const actions = {
       .then(response => {
         let eventsTotal = parseInt(response.headers["x-total-count"]);
         commit("SET_EVENTS_TOTAL", eventsTotal);
+        if (response.data.length == 0) {
+          throw message.errorResponse({
+            statusText: "Data Empty",
+            statusCode: 404
+          });
+        }
         commit("SET_EVENTS", response.data);
       })
       .catch(error => {
         message.dispatchError(dispatch, error.message);
+        throw error;
       });
   },
   fetchEvent({ commit, getters, dispatch }, id) {
@@ -61,6 +68,7 @@ export const actions = {
         })
         .catch(error => {
           message.dispatchError(dispatch, error.message);
+          throw error;
         });
     }
   }

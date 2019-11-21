@@ -1,5 +1,5 @@
 export const dispatchError = (dispatch, message) => {
-  let notification = {
+  const notification = {
     type: "error",
     message: "There was a problem fetching events: " + message
   };
@@ -7,9 +7,18 @@ export const dispatchError = (dispatch, message) => {
 };
 
 export const dispatchSuccess = (dispatch, message = null) => {
-  let notification = {
+  const notification = {
     type: "success",
     message: message ? "Your event has been created!" : message
   };
   dispatch("notification/add", notification, { root: true });
+};
+
+export const errorResponse = ({ statusText, statusCode }) => {
+  return {
+    response: {
+      statusText: statusText,
+      status: statusCode
+    }
+  };
 };

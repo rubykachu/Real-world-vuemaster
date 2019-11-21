@@ -27,10 +27,17 @@ import store from "@/store/index.js";
 
 function getPageEvents(to, next) {
   const currentPage = parseInt(to.query.page || 1);
-  store.dispatch("event/fetchEvents", { page: currentPage }).then(() => {
-    to.params.page = currentPage;
-    next();
-  });
+  store
+    .dispatch("event/fetchEvents", { page: currentPage })
+    .then(() => {
+      to.params.page = currentPage;
+      next();
+    })
+    .catch(error => {
+      if (error.response && error.response.status == 404) {
+        next({ name: "not-found", params: { resource: "page" } });
+      }
+    });
 }
 
 export default {
