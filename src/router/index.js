@@ -6,6 +6,7 @@ import EventShow from "../views/EventShow.vue";
 import EventCreate from "../views/EventCreate.vue";
 import NotFound from "../views/NotFound.vue";
 import NetworkIssue from "../views/NetworkIssue.vue";
+import FormValidation from "../views/FormValidation.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/event/:id",
     name: "event-show",
     component: EventShow
+  },
+  {
+    path: "/form-validation",
+    name: "form-validation",
+    component: FormValidation
   },
   {
     path: "/404",
