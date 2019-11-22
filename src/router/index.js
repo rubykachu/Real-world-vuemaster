@@ -17,15 +17,16 @@ const routes = [
     props: true
   },
   {
+    path: "/event/create",
+    name: "event-create",
+    component: EventCreate,
+    props: false
+  },
+  {
     props: true,
     path: "/event/:id",
     name: "event-show",
     component: EventShow
-  },
-  {
-    path: "/event/create",
-    name: "event-create",
-    component: EventCreate
   },
   {
     path: "/404",
