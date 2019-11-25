@@ -6,8 +6,10 @@ import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 import "nprogress/nprogress.css";
 import Vuelidate from "vuelidate";
+import DateFilter from "@/filters/DateFilter.js";
 
 Vue.use(Vuelidate);
+Vue.filter("date", DateFilter);
 Vue.mixin({
   mounted() {
     console.log("I am mixin belongs to global");

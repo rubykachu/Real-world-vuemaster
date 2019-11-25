@@ -1,7 +1,14 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view :key="$route.fullPath" />
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated fadeInUp"
+      leave-active-class="animated fadeOut"
+      :duration="{ enter: 1100, leave: 300 }"
+    >
+      <router-view :key="$route.fullPath" />
+    </transition>
     <NotificationContainer />
   </div>
 </template>
@@ -18,7 +25,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "./assets/animate.css";
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;

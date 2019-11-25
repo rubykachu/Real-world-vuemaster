@@ -7,6 +7,7 @@ import EventCreate from "../views/EventCreate.vue";
 import NotFound from "../views/NotFound.vue";
 import NetworkIssue from "../views/NetworkIssue.vue";
 import FormValidation from "../views/FormValidation.vue";
+import ExampleTransition from "../views/ExampleTransition.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/form-validation",
     name: "form-validation",
     component: FormValidation
+  },
+  {
+    path: "/example-transition",
+    name: "example-transition",
+    component: ExampleTransition
   },
   {
     path: "/404",
