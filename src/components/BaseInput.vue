@@ -11,25 +11,28 @@
 </template>
 
 <script>
+import { formFieldMixin } from "@/mixins/formFieldMixin";
+
 export default {
-  inheritAttrs: false,
-  props: {
-    label: String,
-    value: [String, Number]
-  },
-  computed: {
-    // Fix confuse action @change and others
-    listeners() {
-      return {
-        ...this.$listeners,
-        input: this.updateValue
-      };
-    }
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit("input", event.target.value);
-    }
-  }
+  mixins: [formFieldMixin]
+  // inheritAttrs: false,
+  // props: {
+  //   label: String,
+  //   value: [String, Number]
+  // },
+  // computed: {
+  //   // Fix confuse action @change and others
+  //   listeners() {
+  //     return {
+  //       ...this.$listeners,
+  //       input: this.updateValue
+  //     };
+  //   }
+  // },
+  // methods: {
+  //   updateValue(event) {
+  //     this.$emit("input", event.target.value);
+  //   }
+  // }
 };
 </script>

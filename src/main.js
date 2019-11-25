@@ -8,6 +8,11 @@ import "nprogress/nprogress.css";
 import Vuelidate from "vuelidate";
 
 Vue.use(Vuelidate);
+Vue.mixin({
+  mounted() {
+    console.log("I am mixin belongs to global");
+  }
+});
 
 const requireComponent = require.context(
   // The relative path of the components folder
