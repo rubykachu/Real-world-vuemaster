@@ -2,7 +2,12 @@
   <div>
     <label v-if="label">{{ label }}</label>
 
-    <select @change="updateValue" v-bind="$attrs" :value="value">
+    <select
+      @change="updateValue"
+      v-bind="$attrs"
+      :value="value"
+      v-on="listeners"
+    >
       <option
         v-for="option in options"
         :key="option"
@@ -22,6 +27,15 @@ export default {
     options: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    // Fix confuse action @change and others
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue
+      };
     }
   },
   methods: {

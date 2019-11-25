@@ -13,6 +13,6 @@ export default new Vuex.Store({
     notification
   },
   state: {
-    categories: ["Coffee", "Tea", "Beer"]
+    categories: [null, "Coffee", "Tea", "Beer"]
   }
 });
