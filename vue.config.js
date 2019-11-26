@@ -8,6 +8,9 @@ module.exports = {
         minSize: 10000,
         maxSize: 250000
       }
+    },
+    devServer: {
+      disableHostCheck: true
     }
   }
 };
