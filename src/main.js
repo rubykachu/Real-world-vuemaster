@@ -10,11 +10,11 @@ import DateFilter from "@/filters/DateFilter.js";
 
 Vue.use(Vuelidate);
 Vue.filter("date", DateFilter);
-Vue.mixin({
-  mounted() {
-    console.log("I am mixin belongs to global");
-  }
-});
+// Vue.mixin({
+//   mounted() {
+//     console.log("I am mixin belongs to global");
+//   }
+// });
 
 const requireComponent = require.context(
   // The relative path of the components folder
